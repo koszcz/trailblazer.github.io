@@ -269,7 +269,7 @@ You can implement your own deletion.
     collection :songs,
       populator: ->(fragment:, **) {
         # find out if incoming song is already added.
-        item = songs.find { |song| song.id.to_s == fragment["id"].to_s }
+        item = songs.find { |song| song.id.present? && song.id.to_s == fragment["id"].to_s }
 
         if fragment["delete"] == "1"
           songs.delete(item)
